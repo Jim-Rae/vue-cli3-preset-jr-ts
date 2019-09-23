@@ -6,7 +6,7 @@ const components = require.context('./', true, /\.vue$/)
 
 components.keys().forEach(key => {
   const component = components(key).default
-  // 获取vue组件的name值或vue文件名作为注册组件名
-  const name = component.name || key.replace(/.*\//g, '').replace(/\.vue/, '')
+  // 由于require的是一个class，在ie中无法覆盖name，导致component.name永远都是'VueComponent'，所以只能获取vue文件名作为注册组件名
+  const name = key.replace(/.*\//g, '').replace(/\.vue/, '')
   Vue.component(name, component)
 })
