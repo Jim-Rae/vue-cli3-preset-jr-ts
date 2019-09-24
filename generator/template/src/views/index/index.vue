@@ -101,8 +101,8 @@ export default class Index extends Vue {
     @include g-set-font( $g-fs-strong, $g-color-themegreen);
   }
 
-  @include g-layout-center-transform('.login-btn', 'y');
   .login-btn {
+    @include g-layout-center-transform('y');
     @include g-set-font($g-fs-strong, $g-color-black);
     display: block;
     height: 60px;
@@ -113,8 +113,8 @@ export default class Index extends Vue {
     }
   }
 
-  @include g-layout-center-transform('.user-wrapper', 'y');
   .user-wrapper {
+    @include g-layout-center-transform('y');
     display: block;
     height: 60px;
     right: 40px;

@@ -102,8 +102,8 @@ export default class Login extends Vue {
   height: 100vh;
   background-color: $g-color-themegreen;
 
-  @include g-layout-center-margin('.form-contianer', 350px, 220px, 'both');
   .form-contianer{
+    @include g-layout-center-margin(350px, 220px, 'both');
     width: 350px;
     height: 220px;
     padding: 25px;

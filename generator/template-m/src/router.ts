@@ -34,7 +34,7 @@ class GlobalRouter {
       // 默认路由
       {
         path: '/',
-        redirect: { name: 'index.breadcrumbDemo.index' }
+        redirect: { name: 'index' }
       }
     ]
     this.routes.push(...defaultPath)
@@ -59,12 +59,11 @@ instance.beforeEach((to, from, next) => {
   next()
 })
 
+// 刷新viewport-units-buggyfill
+instance.afterEach((to, from) => {
+  require('viewport-units-buggyfill').refresh()
+})
+
 export default instance
 
 export { routes }
-
-// 解决路由到重复地址时抛出NavigationDuplicated错误
-const originalPush = Router.prototype.push
-Router.prototype.push = function push (location) {
-  return originalPush.call(this, location).catch(err => err)
-}
