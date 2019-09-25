@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Router, { RouteConfig } from 'vue-router'
+import Router, { RouteConfig, RawLocation, Route } from 'vue-router'
 import { importAll } from '@/utils/routerHelper'
 
 // 全局路由
@@ -65,6 +65,6 @@ export { routes }
 
 // 解决路由到重复地址时抛出NavigationDuplicated错误
 const originalPush = Router.prototype.push
-Router.prototype.push = function push (location) {
-  return originalPush.call(this, location).catch(err => err)
+Router.prototype.push = function push (location: RawLocation) {
+  return originalPush.call<Router, [RawLocation], Promise<Route>>(this, location).catch((err: any) => err)
 }
