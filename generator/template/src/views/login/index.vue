@@ -13,7 +13,6 @@
           :model="loginForm"
           :rules="rules"
           ref="loginForm"
-          @submit.native.prevent
         >
           <el-form-item prop="username">
             <el-input
@@ -29,13 +28,7 @@
               autocomplete="on"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button
-              type="primary"
-              @click="submitForm"
-              class="submit-btn"
-              native-type="submit">
-              登录
-            </el-button>
+            <el-button type="primary" @click="submitForm()" class="submit-btn">登录</el-button>
           </el-form-item>
         </el-form>
       </section>
@@ -71,20 +64,19 @@ export default class Login extends Vue {
   async login () {
     try {
       this.loading = true
-      const res = await this.$_api.login({
+      await this.$_api.login({
         username: this.loginForm.username,
         password: this.loginForm.password
       })
       this.loading = false
-      if (res.status) {
-        this.$message.success('登录成功')
-        this.$router.push({ name: 'index.breadcrumbDemo.index' })
-      } else {
-        this.$message.error(res.message)
-      }
+      this.$message.success('登录成功')
+      this.$router.push({ name: 'index.breadcrumbDemo.index' })
     } catch (error) {
       this.loading = false
-      console.log(error)
+      if (error.message) {
+        this.$message.error(error.message)
+      }
+      console.error(error)
     }
   }
   submitForm () {
