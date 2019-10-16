@@ -36,10 +36,8 @@
                 <i class="el-icon-grape"></i>
                 <span>面包屑Demo</span>
               </template>
-              <el-menu-item-group>
-                <el-menu-item index="/index/breadcrumbDemo/first">第一个页面</el-menu-item>
-                <el-menu-item index="/index/breadcrumbDemo/second">第二个页面</el-menu-item>
-              </el-menu-item-group>
+              <el-menu-item index="/index/breadcrumbDemo/first">第一个页面</el-menu-item>
+              <el-menu-item index="/index/breadcrumbDemo/second">第二个页面</el-menu-item>
             </el-submenu>
             <el-menu-item index="/index/scrollDemo/index">
               <i class="el-icon-orange"></i>
@@ -80,14 +78,9 @@ export default class Index extends Vue {
 @import '@/assets/scss/mixin/layout';
 
 .el-header {
-  position: fixed !important;
-  z-index: 999;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
   border-bottom: solid 1px $g-color-gray-line;
   line-height: 60px;
+  position: relative;
 
   @include g-layout-inline-block-vcenter('.logo');
 
@@ -135,24 +128,19 @@ export default class Index extends Vue {
   }
 }
 
-.el-aside {
-  position: fixed;
-  z-index: 999;
-  top: 80px;
-  left: 0;
-  bottom: 20px;
-
-  .menu {
-    height: 100%;
-  }
-}
-
 .container {
   height: 100%;
-  padding-top: 60px;
+  padding-top: 20px;
+
+  .el-aside {
+
+    .menu {
+      height: 100%;
+    }
+  }
 
   .el-main {
-    padding: 0 0 0 250px;
+    padding: 0;
     overflow: hidden;
     color: $g-color-black;
     height: 100%;
