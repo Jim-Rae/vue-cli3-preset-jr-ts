@@ -68,17 +68,18 @@ export default class Login extends Vue {
         username: this.loginForm.username,
         password: this.loginForm.password
       })
-      this.loading = false
       this.$message.success('登录成功')
       this.$router.push({ name: 'index.breadcrumbDemo.index' })
     } catch (error) {
-      this.loading = false
       if (error.message) {
         this.$message.error(error.message)
       }
       console.error(error)
+    } finally {
+      this.loading = false
     }
   }
+
   submitForm () {
     (this.$refs.loginForm as Form).validate(valid => {
       if (valid) {
@@ -93,13 +94,12 @@ export default class Login extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/var';
-@import '@/assets/scss/mixin/layout';
+@import '@/assets/scss';
 
 .login{
   width: 100%;
   height: 100vh;
-  background-color: $g-color-themegreen;
+  background-color: $g-color-theme;
 
   .form-contianer{
     @include g-layout-center-margin(350px, 220px, 'both');
@@ -116,7 +116,7 @@ export default class Login extends Vue {
     }
 
     .register-link {
-      color: $g-color-themegreen;
+      color: $g-color-theme;
 
       &:hover {
         text-decoration: underline;

@@ -74,35 +74,36 @@ export default class Index extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/var';
-@import '@/assets/scss/mixin/layout';
+@import '@/assets/scss';
 
 .el-header {
-  border-bottom: solid 1px $g-color-gray-line;
+  border-bottom: solid 1px $g-color-border;
   line-height: 60px;
   position: relative;
-
-  @include g-layout-inline-block-vcenter('.logo');
 
   .logo {
     width: 40px;
     height: 40px;
     margin-right: 10px;
+    display: inline-block;
+    vertical-align: middle;
   }
 
   .title {
-    @include g-set-font( $g-fs-strong, $g-color-themegreen);
+    font-size: $g-fs-lg;
+    color: $g-color-theme;
   }
 
   .login-btn {
     @include g-layout-center-transform('y');
-    @include g-set-font($g-fs-strong, $g-color-black);
+    font-size: $g-fs-lg;
+    color: $g-color-font--normal;
     display: block;
     height: 60px;
     right: 40px;
 
     &:hover {
-      color: $g-color-themegreen;
+      color: $g-color-theme;
     }
   }
 
@@ -113,15 +114,17 @@ export default class Index extends Vue {
     right: 40px;
 
     .user-info {
-      @include g-set-font($g-fs-strong, $g-color-themegreen);
+      font-size: $g-fs-lg;
+      color: $g-color-theme;
       margin-right: 20px;
     }
 
     .logout-btn {
-      @include g-set-font($g-fs-strong, $g-color-black);
+      font-size: $g-fs-lg;
+      color: $g-color-font--normal;
 
       &:hover {
-        color: $g-color-themegreen;
+        color: $g-color-theme;
         cursor: pointer;
       }
     }
@@ -142,7 +145,7 @@ export default class Index extends Vue {
   .el-main {
     padding: 0;
     overflow: hidden;
-    color: $g-color-black;
+    color: $g-color-font--normal;
     height: 100%;
     display: flex;
     flex-direction: column;

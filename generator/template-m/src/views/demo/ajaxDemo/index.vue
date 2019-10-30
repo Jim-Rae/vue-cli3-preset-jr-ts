@@ -26,22 +26,22 @@ export default class AjaxDemo extends Vue {
 
   async getList () {
     try {
-      const res = await this.$_api.getList()
-      this.list = res.map((item: any) => {
+      const data = await this.$_api.getList()
+      this.list = data.map((item: any) => {
         return {
           title: item.title,
-          image: 'http://jimrae.top:3001' + item.image
+          image: 'http://jimrae.top' + item.image
         }
       })
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/index';
+@import '@/assets/scss';
 
 .ajax-demo {
   padding-top: 84px;
@@ -55,8 +55,8 @@ export default class AjaxDemo extends Vue {
     }
 
     p {
-      font-size: 28px;
-      color: $g-color-themegreen;
+      font-size: $g-fs-bs;
+      color: $g-color-theme;
     }
   }
 }

@@ -38,7 +38,7 @@ export default class AjaxDemo extends Vue {
       this.list = data.map((item: any) => {
         return {
           title: item.title,
-          image: 'http://jimrae.top:3001' + item.image
+          image: 'http://jimrae.top' + item.image
         }
       })
       console.log(this.list)
@@ -72,7 +72,7 @@ export default class AjaxDemo extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/index';
+@import '@/assets/scss';
 
 .ajax-demo {
   text-align: center;
@@ -86,7 +86,8 @@ export default class AjaxDemo extends Vue {
       margin: 20px;
 
       .title {
-        @include g-set-font($g-fs-normal, $g-color-themegreen);
+        font-size: $g-fs-bs;
+        color: $g-color-theme;
         margin-bottom: 20px;
       }
     }

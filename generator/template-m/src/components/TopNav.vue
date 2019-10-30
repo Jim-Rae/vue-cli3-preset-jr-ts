@@ -52,18 +52,18 @@ export default class TopNav extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/index';
+@import '@/assets/scss';
 
 .top-nav {
   position: fixed;
   z-index: 100;
   width: 100%;
-  height: 84px;
-  font-size: 32px;
+  height: $g-header-height;
+  font-size: $g-fs-md;
   color: white;
   text-align: center;
-  line-height: 84px;
-  background-color: $g-color-themegreen;
+  line-height: $g-header-height;
+  background-color: $g-color-theme;
   left: 0;
   top: 0;
 
@@ -92,6 +92,7 @@ export default class TopNav extends Vue {
     height: 100%;
     right: 0;
     top: 0;
+    @include g-layout-flex(flex-end);
   }
 }
 </style>

@@ -36,7 +36,7 @@ const computeScrollBarWidth = (): number => {
  * @param {Array<String>} keysArr 过滤要拷贝的字段
  */
 const fastCopy = (obj: object, keysArr?: Array<string>) => {
-  const clone = window.JSON.parse(window.JSON.stringify(obj))
+  const clone = JSON.parse(JSON.stringify(obj))
   if (!keysArr) {
     return clone
   }
@@ -54,8 +54,8 @@ const fastCopy = (obj: object, keysArr?: Array<string>) => {
  * @param {String} str 需要操作的字符串
  * @returns {String}
  */
-function trim(str: string) {
-  return str.replace(/^\s*/, '').replace(/\s*$/, '');
+function trim (str: string) {
+  return str.replace(/^\s*/, '').replace(/\s*$/, '')
 }
 
 /**
@@ -66,21 +66,21 @@ function trim(str: string) {
  */
 function forEach (obj: any, fn: Function) {
   if (obj === null || typeof obj === 'undefined') {
-    return;
+    return
   }
 
   if (typeof obj !== 'object') {
-    obj = [obj];
+    obj = [obj]
   }
 
   if (isArray(obj)) {
     for (var i = 0, l = obj.length; i < l; i++) {
-      fn.call(null, obj[i], i, obj);
+      fn(obj[i], i, obj)
     }
   } else {
     for (var key in obj) {
       if (Object.prototype.hasOwnProperty.call(obj, key)) {
-        fn.call(null, obj[key], key, obj);
+        fn(obj[key], key, obj)
       }
     }
   }
@@ -93,20 +93,20 @@ function forEach (obj: any, fn: Function) {
  * @param {Object} obj1 需要合并的对象
  * @returns {Object} 合并后的对象
  */
-function deepMerge(...params: any[]) {
-  var result: any = {};
-  function assignValue(val: any, key: string | number) {
+function deepMerge (...params: any[]) {
+  var result: any = {}
+  function assignValue (val: any, key: string | number) {
     if (typeof result[key] === 'object' && typeof val === 'object') {
-      result[key] = deepMerge(result[key], val);
+      result[key] = deepMerge(result[key], val)
     } else {
-      result[key] = val;
+      result[key] = val
     }
   }
 
   for (var i = 0, l = params.length; i < l; i++) {
-    forEach(params[i], assignValue);
+    forEach(params[i], assignValue)
   }
-  return result;
+  return result
 }
 
 /**
@@ -125,13 +125,13 @@ function dateToString (dateInstance: Date, seperator: string = '-') {
   let monthStr: string = ''
   let dateStr: string = ''
   if (month >= 1 && month <= 9) {
-    monthStr = '0' + month;
+    monthStr = '0' + month
   }
   if (date >= 0 && date <= 9) {
-    dateStr = '0' + date;
+    dateStr = '0' + date
   }
-  const currentdate: string = yearStr + seperator + monthStr + seperator + dateStr;
-  return currentdate;
+  const currentdate: string = yearStr + seperator + monthStr + seperator + dateStr
+  return currentdate
 }
 
 /**
@@ -146,6 +146,43 @@ function getWeekNameFromDate (date: Date, prefix: string = '周') {
   return prefix + '日一二三四五六'.charAt(date.getDay())
 }
 
+/**
+ * 将数字转化成保留两位小数的金额格式，如999,999,999.99
+ *
+ * @method parsePriceFormat
+ * @param {number} price 需要转换的价格
+ * @returns {String} 保留两位小数的金额格式
+ */
+function parsePriceFormat (price: number) {
+  const str: string = price.toFixed(2)
+  let newStr: string = ''
+  let count: number = 0
+  if (!str.includes('.')) {
+    for (let i = str.length - 1; i >= 0; i--) {
+      if (count % 3 === 0 && count !== 0) {
+        newStr = str.charAt(i) + ',' + newStr
+      } else {
+        newStr = str.charAt(i) + newStr
+      }
+      count++
+    }
+    // 自动补小数点后两位
+    newStr += '.00'
+    return newStr
+  } else {
+    for (var i = str.indexOf('.') - 1; i >= 0; i--) {
+      if (count % 3 === 0 && count !== 0) {
+        newStr = str.charAt(i) + ',' + newStr
+      } else {
+        newStr = str.charAt(i) + newStr
+      }
+      count++
+    }
+    newStr += str.substr(str.indexOf('.'), 3)
+    return newStr
+  }
+}
+
 export {
   computeScrollBarWidth,
   fastCopy,
@@ -153,5 +190,6 @@ export {
   forEach,
   deepMerge,
   dateToString,
-  getWeekNameFromDate
+  getWeekNameFromDate,
+  parsePriceFormat
 }

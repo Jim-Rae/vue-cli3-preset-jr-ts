@@ -3,10 +3,10 @@
  * @Date: 2019-10-23
  * @Last Modified by: Jim Rae
  * @Last Modified time: 2019-10-23
- * @Desc 常用工具库
+ * @Desc 校验器
  */
 
-var toString = Object.prototype.toString;
+var toString = Object.prototype.toString
 
 /**
  * 判断一个值是否为Array
@@ -14,8 +14,8 @@ var toString = Object.prototype.toString;
  * @param {Object} val 被判断的值
  * @returns {boolean}
  */
-function isArray(val: any) {
-  return toString.call(val) === '[object Array]';
+function isArray (val: any) {
+  return toString.call(val) === '[object Array]'
 }
 
 /**
@@ -24,8 +24,8 @@ function isArray(val: any) {
  * @param {Object} val 被判断的值
  * @returns {boolean}
  */
-function isArrayBuffer(val: any) {
-  return toString.call(val) === '[object ArrayBuffer]';
+function isArrayBuffer (val: any) {
+  return toString.call(val) === '[object ArrayBuffer]'
 }
 
 /**
@@ -34,8 +34,8 @@ function isArrayBuffer(val: any) {
  * @param {Object} val 被判断的值
  * @returns {boolean}
  */
-function isFormData(val: any) {
-  return (typeof FormData !== 'undefined') && (val instanceof FormData);
+function isFormData (val: any) {
+  return (typeof FormData !== 'undefined') && (val instanceof FormData)
 }
 
 /**
@@ -44,14 +44,14 @@ function isFormData(val: any) {
  * @param {Object} val 被判断的值
  * @returns {boolean}
  */
-function isArrayBufferView(val: any) {
-  var result;
+function isArrayBufferView (val: any) {
+  var result
   if ((typeof ArrayBuffer !== 'undefined') && (ArrayBuffer.isView)) {
-    result = ArrayBuffer.isView(val);
+    result = ArrayBuffer.isView(val)
   } else {
-    result = (val) && (val.buffer) && (val.buffer instanceof ArrayBuffer);
+    result = (val) && (val.buffer) && (val.buffer instanceof ArrayBuffer)
   }
-  return result;
+  return result
 }
 
 /**
@@ -60,8 +60,8 @@ function isArrayBufferView(val: any) {
  * @param {Object} val 被判断的值
  * @returns {boolean}
  */
-function isString(val: any) {
-  return typeof val === 'string';
+function isString (val: any) {
+  return typeof val === 'string'
 }
 
 /**
@@ -70,8 +70,8 @@ function isString(val: any) {
  * @param {Object} val 被判断的值
  * @returns {boolean}
  */
-function isNumber(val: any) {
-  return typeof val === 'number';
+function isNumber (val: any) {
+  return typeof val === 'number'
 }
 
 /**
@@ -80,8 +80,8 @@ function isNumber(val: any) {
  * @param {Object} val 被判断的值
  * @returns {boolean}
  */
-function isUndefined(val: any) {
-  return typeof val === 'undefined';
+function isUndefined (val: any) {
+  return typeof val === 'undefined'
 }
 
 /**
@@ -90,8 +90,8 @@ function isUndefined(val: any) {
  * @param {Object} val 被判断的值
  * @returns {boolean}
  */
-function isObject(val: any) {
-  return val !== null && typeof val === 'object';
+function isObject (val: any) {
+  return val !== null && typeof val === 'object'
 }
 
 /**
@@ -100,8 +100,8 @@ function isObject(val: any) {
  * @param {Object} val 被判断的值
  * @returns {boolean}
  */
-function isDate(val: any) {
-  return toString.call(val) === '[object Date]';
+function isDate (val: any) {
+  return toString.call(val) === '[object Date]'
 }
 
 /**
@@ -110,8 +110,8 @@ function isDate(val: any) {
  * @param {Object} val 被判断的值
  * @returns {boolean}
  */
-function isFile(val: any) {
-  return toString.call(val) === '[object File]';
+function isFile (val: any) {
+  return toString.call(val) === '[object File]'
 }
 
 /**
@@ -120,8 +120,8 @@ function isFile(val: any) {
  * @param {Object} val 被判断的值
  * @returns {boolean}
  */
-function isBlob(val: any) {
-  return toString.call(val) === '[object Blob]';
+function isBlob (val: any) {
+  return toString.call(val) === '[object Blob]'
 }
 
 /**
@@ -130,8 +130,8 @@ function isBlob(val: any) {
  * @param {Object} val 被判断的值
  * @returns {boolean}
  */
-function isFunction(val: any) {
-  return toString.call(val) === '[object Function]';
+function isFunction (val: any) {
+  return toString.call(val) === '[object Function]'
 }
 
 /**
@@ -140,8 +140,8 @@ function isFunction(val: any) {
  * @param {Object} val 被判断的值
  * @returns {boolean}
  */
-function isStream(val: any) {
-  return isObject(val) && isFunction(val.pipe);
+function isStream (val: any) {
+  return isObject(val) && isFunction(val.pipe)
 }
 
 /**
@@ -150,8 +150,8 @@ function isStream(val: any) {
  * @param {Object} val 被判断的值
  * @returns {boolean}
  */
-function isURLSearchParams(val: any) {
-  return typeof URLSearchParams !== 'undefined' && val instanceof URLSearchParams;
+function isURLSearchParams (val: any) {
+  return typeof URLSearchParams !== 'undefined' && val instanceof URLSearchParams
 }
 
 /**
