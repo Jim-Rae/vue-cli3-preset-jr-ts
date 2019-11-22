@@ -183,6 +183,44 @@ function parsePriceFormat (price: number) {
   }
 }
 
+/**
+ * 兼容的方式绑定事件
+ *
+ * @method registerEvent
+ * @param {any} target 需要绑定事件的目标
+ * @param {string} type 事件类型
+ * @param {any} handler 事件处理函数
+ */
+function registerEvent (target: any, type: string, handler: any) {
+  if (target.addEventListener) {
+    target.addEventListener(type, handler)
+  } else if (target.attachEvent) {
+    // 兼容低版本ie
+    target.attachEvent('on' + type, handler)
+  } else {
+    target['on' + type] = handler
+  }
+}
+
+/**
+ * 兼容的方式解绑事件
+ *
+ * @method removeEvent
+ * @param {any} target 需要解绑事件的目标
+ * @param {string} type 事件类型
+ * @param {any} handler 事件处理函数
+ */
+function removeEvent (target: any, type: string, handler: any) {
+  if (target.removeEventListener) {
+    target.removeEventListener(type, handler)
+  } else if (target.detachEvent) {
+    // 兼容低版本ie
+    target.detachEvent('on' + type, handler)
+  } else {
+    target['on' + type] = null
+  }
+}
+
 export {
   computeScrollBarWidth,
   fastCopy,
@@ -191,5 +229,7 @@ export {
   deepMerge,
   dateToString,
   getWeekNameFromDate,
-  parsePriceFormat
+  parsePriceFormat,
+  registerEvent,
+  removeEvent
 }

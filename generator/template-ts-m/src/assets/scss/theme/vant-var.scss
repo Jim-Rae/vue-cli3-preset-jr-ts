@@ -3,3 +3,11 @@
 .van-tabbar-item--active {
   color: $g-color-theme;
 }
+
+.van-button--mini {
+  display: inline-block;
+  min-width: 50px;
+  height: 22px;
+  font-size: 10px;
+  line-height: 22px;
+}
