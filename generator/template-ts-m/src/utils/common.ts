@@ -2,7 +2,7 @@
  * @Author: Jim Rae
  * @Date: 2019-09-16
  * @Last Modified by: Jim Rae
- * @Last Modified time: 2019-10-23
+ * @Last Modified time: 2019-11-25
  * @Desc 常用工具库
  */
 
@@ -221,6 +221,41 @@ function removeEvent (target: any, type: string, handler: any) {
   }
 }
 
+/**
+ * 函数去抖
+ *
+ * @method debounce
+ * @param {(...args: any) => void} fn 要去抖的函数
+ * @param {number} delay 去抖时间
+ */
+function debounce (fn: (...args: any) => void, delay: number = 100) {
+  let timer = 0;
+  return function (this: any, ...args: any) {
+    timer && clearTimeout(timer);
+    timer = setTimeout(() => {
+      fn.apply(this, args);
+    }, delay);
+  }
+}
+
+/**
+ * 函数节流
+ *
+ * @method throttle
+ * @param {(...args: any) => void} fn 要节流的函数
+ * @param duration 节流时间间隔
+ */
+function throttle (fn: (...args: any) => void, duration: number = 100) {
+  let begin = new Date().getTime();
+  return function (this: any, ...args: any) {
+    let current = new Date().getTime();
+    if (current - begin >= duration) {
+      fn.apply(this, args)
+      begin = current;
+    }
+  }
+}
+
 export {
   computeScrollBarWidth,
   fastCopy,
@@ -231,5 +266,7 @@ export {
   getWeekNameFromDate,
   parsePriceFormat,
   registerEvent,
-  removeEvent
+  removeEvent,
+  debounce,
+  throttle
 }
