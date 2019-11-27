@@ -2,8 +2,8 @@
  * @Author: JimRae
  * @Date: 2019-09-04
  * @Last Modified by: JimRae
- * @Last Modified time: 2019-09-04
- * @Desc 自带滚动条的box，可以更好的自定义滚动条
+ * @Last Modified time: 2019-11-27
+ * @Desc 自带滚动条的box，可以更好的自定义滚动条。（当前组设置height为100%，如果要兼容ie 9-10，则需要外部设置准确的height）
  */
 
 <template>
@@ -14,7 +14,7 @@
       </div>
     </div>
     <div v-show="scrollVisible" class='scrollbar-bar' ref="bar">
-      <div class="scrollbar-thumb" ref="thumb"></div>
+      <div class="scrollbar-thumb" ref="thumb" :style="`height: ${thumbHeight}%; transform: translateY(${thumbMoveY}%)`"></div>
     </div>
   </div>
 </template>
@@ -31,6 +31,8 @@ export default class AwesomeScrollbarBox extends Vue {
   cursorDown = false // 是否按下滚动条
   thumbClickPosition = 0 // 鼠标点击位置到Thumb顶部的距离
   gutter = 0 // 浏览器默认滚动条的宽度
+  thumbHeight = 100
+  thumbMoveY = 0
 
   get wrapper () {
     return this.$refs.wrapper as HTMLElement
@@ -80,10 +82,11 @@ export default class AwesomeScrollbarBox extends Vue {
     this.thumb.removeEventListener('mousedown', this.handleMousedown)
   }
   // 更新Thumb长度
-  updateThumb () {
+  updateThumb (e: Event) {
     let heightPercentage = (this.wrapper.clientHeight * 100 / this.wrapper.scrollHeight)
     if (heightPercentage < 100) {
-      this.thumb.style.height = heightPercentage + '%'
+      // this.thumb.style.height = heightPercentage + '%'
+      this.thumbHeight = heightPercentage
       this.scrollVisible = true
     } else {
       this.scrollVisible = false
@@ -91,9 +94,10 @@ export default class AwesomeScrollbarBox extends Vue {
   }
   // 处理scroll事件
   handleScroll () {
-    let moveY = (this.wrapper.scrollTop * 100 / this.wrapper.clientHeight)
-    // 通过计算出来的百分比，然后对滚动条执行translate移动
-    this.thumb.style.transform = 'translateY(' + moveY + '%)'
+    // let moveY = (this.wrapper.scrollTop * 100 / this.wrapper.clientHeight)
+    // // 通过计算出来的百分比，然后对滚动条执行translate移动
+    // this.thumb.style.transform = 'translateY(' + moveY + '%)'
+    this.thumbMoveY = this.wrapper.scrollTop * 100 / this.wrapper.clientHeight
   }
   // 处理点击滚动轨道时的click事件
   clickTrackHandle (e: MouseEvent) {
@@ -146,7 +150,7 @@ export default class AwesomeScrollbarBox extends Vue {
 
 <style lang="scss" scoped>
 
-.scrollbar-box{
+.scrollbar-box {
   position: relative;
   overflow: hidden;
   height: 100%;

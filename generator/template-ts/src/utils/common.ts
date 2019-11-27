@@ -17,13 +17,22 @@ const computeScrollBarWidth = (): number => {
   // 创建一个div来计算浏览器默认滚动条宽度
   const box = document.createElement('div')
   box.style.width = '100px'
+  box.style.height = '100px'
   box.style.visibility = 'hidden'
   box.style.position = 'absolute'
   box.style.top = '-9999px'
   box.style.overflow = 'scroll'
   document.body.appendChild(box)
+
+  // 兼容ie 9-10, 由于在ie中，如果div里没有内容，clientWidth会为0
+  const inner = document.createElement('div')
+  inner.style.width = '100%'
+  inner.style.height = '200%'
+  box.appendChild(inner)
+
   // 在box没有border的情况下，box.offsetWidth和box.clientWidth的差值就是滚动条宽度
   const scrollBarWidth = box.offsetWidth - box.clientWidth
+
   box.parentNode!.removeChild(box)
 
   return scrollBarWidth
@@ -229,12 +238,12 @@ function removeEvent (target: any, type: string, handler: any) {
  * @param {number} delay 去抖时间
  */
 function debounce (fn: (...args: any) => void, delay: number = 100) {
-  let timer = 0;
+  let timer = 0
   return function (this: any, ...args: any) {
-    timer && clearTimeout(timer);
+    timer && clearTimeout(timer)
     timer = setTimeout(() => {
-      fn.apply(this, args);
-    }, delay);
+      fn.apply(this, args)
+    }, delay)
   }
 }
 
@@ -246,12 +255,12 @@ function debounce (fn: (...args: any) => void, delay: number = 100) {
  * @param duration 节流时间间隔
  */
 function throttle (fn: (...args: any) => void, duration: number = 100) {
-  let begin = new Date().getTime();
+  let begin = new Date().getTime()
   return function (this: any, ...args: any) {
-    let current = new Date().getTime();
+    let current = new Date().getTime()
     if (current - begin >= duration) {
       fn.apply(this, args)
-      begin = current;
+      begin = current
     }
   }
 }
